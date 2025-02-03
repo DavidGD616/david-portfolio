@@ -1,10 +1,12 @@
 ---
-import "../styles/global.css";
+import "../styles/global.css"
 
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
 
-import SectionContainer from "../components/SectionContainer.astro";
-import Hero from "../components/Hero.astro";
+import SectionContainer from "../components/SectionContainer.astro"
+import Hero from "../components/Hero.astro"
+import TitleSection from "../components/TitleSection.astro"
+import CodeIcon from "../assets/Code.astro"
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -19,5 +21,13 @@ import Hero from "../components/Hero.astro";
 			<Hero />
 			<slot />
 		</SectionContainer>
+		<div class="space-y-24">
+			<SectionContainer id="projects">
+				<TitleSection>
+					<CodeIcon class="size-7" />
+					Projects
+				</TitleSection>
+			</SectionContainer>
+		</div>
 	</main>
 </Layout>
