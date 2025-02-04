@@ -2,9 +2,9 @@
 import { Image } from "astro:assets";
 import me from "../images/me.png";
 import Badge from "./Badge.astro";
-import MailIcon from "../assets/Mail.astro"
-import LinkedinIcon from "../assets/LinkedIn.astro"
-import SocialPill from "./SocialPill.astro"
+import MailIcon from "../assets/Mail.astro";
+import LinkedinIcon from "../assets/LinkedIn.astro";
+import SocialPill from "./SocialPill.astro";
 
 const imageAlt = "David Guerrero";
 ---
@@ -29,18 +29,19 @@ const imageAlt = "David Guerrero";
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-[#64ffda] [&>strong]:text-[#1dd05d] [&>strong]:font-semibold dark:text-gray-300"
   >
-    +3 years of experience. <strong
-      >Self-taught Software Engineer with a passion for creating innovative web solutions.</strong
-    > Specialized in developing unique web applications.
+    <strong>
+      Self-taught Software Engineer with a passion for creating innovative web
+      solutions.
+    </strong> Specialized in developing unique web applications.
   </p>
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="mailto:David.GuerreroD@protonmail.com">
-        <MailIcon class="size-4" />
-        Contact Me
+      <MailIcon class="size-4" />
+      Contact Me
     </SocialPill>
     <SocialPill href="https://www.linkedin.com/in/david-guerrerodiaz/">
-        <LinkedinIcon class="size-4" />
-        LinkedIn
+      <LinkedinIcon class="size-4" />
+      LinkedIn
     </SocialPill>
   </nav>
 </div>
