@@ -1,8 +1,13 @@
 ---
-import { Image } from "astro:assets";
-import Sanimals from "../images/sanimals.jpg";
-import React from "../assets/React.astro";
-import Tailwind from "../assets/Tailwind.astro";
+import { Image } from "astro:assets"
+import Sanimals from "../images/sanimals.jpg"
+import React from "../assets/React.astro"
+import Tailwind from "../assets/Tailwind.astro"
+import GitHub from "../assets/GitHub.astro"
+import Link from "../assets/Link.astro"
+import LinkButton from "./LinkButton.astro"
+import Express from "../assets/Express.astro"
+import MongoDB from "../assets/MongoDB.astro"
 
 const TAGS = {
   REACT: {
@@ -15,17 +20,27 @@ const TAGS = {
     class: "bg-[#003159] text-white",
     icon: Tailwind,
   },
+  Express: {
+    name: "Express.js",
+    class: "bg-black text-white",
+    icon: Express,
+  },
+  MONGODB: {
+    name: "MongoDB",
+    class: "bg-[#001e2b] border border-[#00ed64] text-white",
+    icon: MongoDB,
+  }
 };
 
 const PROJECTS = [
   {
-    title: "Sanimals",
+    title: "Sanimals - E-commerce",
     description:
       "E-commerce fully functional made with React, if you order something you will receive it",
     link: "https://sanimals.vercel.app/",
     github: "https://github.com/DavidGD616/sanimals",
     image: Sanimals,
-    tags: [TAGS.REACT, TAGS.TAILWIND],
+    tags: [TAGS.REACT, TAGS.TAILWIND, TAGS.Express, TAGS.MONGODB],
   },
 ];
 ---
@@ -45,16 +60,16 @@ const PROJECTS = [
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 md:max-w-lg">
+        <div class="w-full md:w-1/2 md:max-w-lg content-center">
           <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
             {title}
           </h3>
           <div class="flex flex-wrap mt-2">
-            <ul class="flex flex-row mb-2 gap-x-2">
+            <ul class="flex flex-wrap flex-row mb-2 gap-x-2">
               {tags.map((tag) => (
                 <li>
                   <span
-                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
+                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 mt-2 whitespace-nowrap overflow-hidden text-ellipsis`}
                   >
                     <tag.icon class="size-4" />
                     {tag.name}
@@ -64,6 +79,20 @@ const PROJECTS = [
             </ul>
             <div class="mt-2 text-gray-700 dark:text-gray-400">
               {description}
+            </div>
+            <div class="flex items-end justify-start mt-4 gap-x-4">
+                {github && (
+                    <LinkButton href={github}>
+                      <GitHub class="size-6" />
+                      Code
+                    </LinkButton>
+                )}
+                {link && (
+                  <LinkButton href={link}>
+                    <Link class="size-4" />
+                    Preview
+                  </LinkButton>
+                )}
             </div>
           </div>
         </div>
