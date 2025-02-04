@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets"
 import Sanimals from "../images/sanimals.jpg"
+import SpotInsight from "../images/SpotInsight.jpg"
 import React from "../assets/React.astro"
 import Tailwind from "../assets/Tailwind.astro"
 import GitHub from "../assets/GitHub.astro"
@@ -34,14 +35,22 @@ const TAGS = {
 
 const PROJECTS = [
   {
-    title: "Sanimals - E-commerce",
+    title: "Sanimals - Print-on-Demand Ecommerce Website",
     description:
-      "E-commerce fully functional made with React, if you order something you will receive it",
+      "Full-stack e-commerce site for selling custom shirts using React, Express, and MongoDB. The site features live purchasing with secure payment integration via Stripe, showcasing my ability to create a functional, production-level application from scratch.",
     link: "https://sanimals.vercel.app/",
     github: "https://github.com/DavidGD616/sanimals",
     image: Sanimals,
     tags: [TAGS.REACT, TAGS.TAILWIND, TAGS.Express, TAGS.MONGODB],
   },
+  {
+    title: "SpotInsight - Get your spotify stats all the times (working on local for the moment)",
+    description:
+      "Web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
+    github: "https://github.com/DavidGD616/spotinsight",
+    image: SpotInsight,
+    tags: [TAGS.REACT, TAGS.TAILWIND, TAGS.Express],
+  }
 ];
 ---
 
