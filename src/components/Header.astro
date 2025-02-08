@@ -28,7 +28,7 @@ const navItems = [
 <header
   class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
   >
-  <nav class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center">
+  <nav class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center bg-white dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-90">
     {
         navItems.map((link) => (
           <a
@@ -43,3 +43,25 @@ const navItems = [
       <ThemeToggle />
   </nav>
 </header>
+
+
+<style>
+ @keyframes nav-shadow {
+    0% {
+        background-color: rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+  nav {
+    animation: nav-shadow 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+</style>
