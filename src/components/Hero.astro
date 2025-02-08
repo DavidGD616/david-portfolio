@@ -22,9 +22,10 @@ const imageAlt = "David Guerrero";
     </a>
   </div>
   <h1
-    class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
+    class="typewrite text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
+    data-period="2000" data-type='[ "Hi, I am David Guerrero.", "I am Creative.", "I Love to Develop.", "I Love Design." ]'
   >
-    Hi!, I am David Guerrero
+    <span class="wrap"></span>
   </h1>
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-[#62fbd8] [&>strong]:text-[#1dd05d] [&>strong]:font-semibold dark:text-gray-300"
@@ -45,3 +46,68 @@ const imageAlt = "David Guerrero";
     </SocialPill>
   </nav>
 </div>
+
+<script>
+  class TxtType {
+    el: HTMLElement;
+    toRotate: string[];
+    loopNum: number;
+    period: number;
+    txt: string;
+    isDeleting: boolean;
+
+    constructor(el: HTMLElement, toRotate: string[], period: string | number) {
+        this.el = el;
+        this.toRotate = toRotate;
+        this.loopNum = 0;
+        this.period = typeof period === 'string' ? parseInt(period, 10) : period;
+        this.txt = '';
+        this.isDeleting = false;
+        this.tick();
+    }
+
+    tick() {
+        const i = this.loopNum % this.toRotate.length;
+        const fullTxt = this.toRotate[i];
+
+        this.txt = this.isDeleting 
+            ? fullTxt.substring(0, this.txt.length - 1) 
+            : fullTxt.substring(0, this.txt.length + 1);
+
+        this.el.innerHTML = `<span class="wrap">${this.txt}</span>`;
+
+        let delta = 200 - Math.random() * 100;
+        if (this.isDeleting) delta /= 2;
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+        }
+
+        setTimeout(() => this.tick(), delta);
+    }
+}
+
+window.addEventListener("load", () => {
+    const elements = document.querySelectorAll<HTMLElement>('.typewrite');
+    elements.forEach(element => {
+        const toRotateAttr = element.getAttribute('data-type');
+        const periodAttr = element.getAttribute('data-period');
+        
+        if (toRotateAttr) {
+            const toRotate = JSON.parse(toRotateAttr) as string[];
+            new TxtType(element, toRotate, periodAttr || 2000);
+        }
+    });
+
+    // Inject CSS
+    const css = document.createElement("style");
+    css.textContent = ".typewrite > .wrap { border-right: 0.08em solid #1dd05d }";
+    document.head.appendChild(css);
+});
+
+</script>
