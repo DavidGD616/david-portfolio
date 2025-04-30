@@ -2,19 +2,27 @@
 import { Image } from "astro:assets"
 import Sanimals from "../images/sanimals.jpg"
 import SpotInsight from "../images/SpotInsight.jpg"
+import Devsboard from "../images/devsboard.jpg"
 import React from "../assets/React.astro"
+import NextJS from "../assets/NextJS.astro"
 import Tailwind from "../assets/Tailwind.astro"
 import GitHub from "../assets/GitHub.astro"
 import Link from "../assets/Link.astro"
 import LinkButton from "./LinkButton.astro"
 import Express from "../assets/Express.astro"
 import MongoDB from "../assets/MongoDB.astro"
+import Supabase from "../assets/Supabase.astro"
 
 const TAGS = {
   REACT: {
     name: "React.js",
     class: "bg-black text-white",
     icon: React,
+  },
+  NEXTJS: {
+    name: "Next Js",
+    class: "bg-white text-black",
+    icon: NextJS,
   },
   TAILWIND: {
     name: "Tailwind CSS",
@@ -30,10 +38,23 @@ const TAGS = {
     name: "MongoDB",
     class: "bg-[#001e2b] border border-[#00ed64] text-white",
     icon: MongoDB,
+  },
+  SUPABASE: {
+    name: "Supabase",
+    class: "bg-black text-white",
+    icon: Supabase,
   }
 };
 
 const PROJECTS = [
+  {
+    title: "DevsBoard - Job Aggregator for Dev Jobs",
+    description:
+      "Full-stack job aggregation platform built with Next.js, React, and Supabase. DevsBoard helps tech professionals discover career opportunities through an intuitive interface with real-time job updates, advanced filtering, and location-based recommendations, demonstrating my ability to create practical solutions for real-world problems.",
+    link: "https://devsboard.vercel.app/",
+    image: Devsboard,
+    tags: [TAGS.NEXTJS, TAGS.TAILWIND, TAGS.SUPABASE],
+  },
   {
     title: "Sanimals - Print-on-Demand Ecommerce Website",
     description:
