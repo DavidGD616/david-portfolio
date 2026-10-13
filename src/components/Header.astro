@@ -1,11 +1,5 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
-import { Image } from 'astro:assets';
-import me from '../images/me.png';
 ---
-<header class="identity-rail">
-  <a class="rail-mark" href="#main" aria-label="David Guerrero, home">dg<span aria-hidden="true">.</span></a>
-  <div class="identity"><Image src={me} width={100} alt="Portrait of David Guerrero" /><p class="eyebrow">Developer / maker</p><h1>David<br />Guerrero<span>.</span></h1><p class="rail-bio">Self-taught web developer.<br />Learning by building.</p></div>
-  <nav aria-label="Main navigation"><a href="#projects"><span>01</span>Selected work <span aria-hidden="true">↗</span></a><a href="#about-me"><span>02</span>About me <span aria-hidden="true">↗</span></a><a href="#contact"><span>03</span>Elsewhere <span aria-hidden="true">↗</span></a></nav>
-  <div class="rail-bottom"><a href="https://github.com/DavidGD616">GitHub ↗</a><ThemeToggle /></div>
-</header>
+<div class="reading-progress" aria-hidden="true"></div>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="#main" aria-label="David Guerrero, home"><span class="wordmark-symbol" aria-hidden="true">d<span>g</span></span><span>David Guerrero<span class="wordmark-sub">Developer & curious human</span></span></a><nav aria-label="Main navigation"><a href="#projects">Work</a><a href="#about-me">About</a><a href="#contact">Contact</a></nav><ThemeToggle /></div></header>

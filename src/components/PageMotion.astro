@@ -1,35 +1,71 @@
 <script>
-  // Animate on arrival, never hide content while waiting for JavaScript.
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  const pointerPreference = matchMedia('(hover: hover) and (pointer: fine)');
+  const stage = document.querySelector<HTMLElement>('[data-pointer-stage]');
+  const progress = document.querySelector<HTMLElement>('.reading-progress');
   let observer: IntersectionObserver | undefined;
-  const selector = '.project-heading, .project-info, .about, .contact';
+  let scrollFrame = 0;
+  let pointerFrame = 0;
+  let pointerX = 0;
+  let pointerY = 0;
 
+  function updateProgress() {
+    scrollFrame = 0;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    if (progress) progress.style.transform = `scaleX(${distance > 0 ? Math.min(1, Math.max(0, scrollY / distance)) : 0})`;
+  }
+  function onScroll() {
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(updateProgress);
+  }
+  function move(event: PointerEvent) {
+    if (!stage || preference.matches || !pointerPreference.matches) return;
+    const rect = stage.getBoundingClientRect();
+    pointerX = (event.clientX - rect.left) / rect.width * 2 - 1;
+    pointerY = (event.clientY - rect.top) / rect.height * 2 - 1;
+    if (!pointerFrame) pointerFrame = requestAnimationFrame(() => {
+      pointerFrame = 0;
+      stage.style.setProperty('--pointer-x', String(pointerX));
+      stage.style.setProperty('--pointer-y', String(pointerY));
+    });
+  }
+  function resetPointer() {
+    cancelAnimationFrame(pointerFrame);
+    pointerFrame = 0;
+    stage?.style.setProperty('--pointer-x', '0');
+    stage?.style.setProperty('--pointer-y', '0');
+  }
   function stop() {
     observer?.disconnect();
     observer = undefined;
-    document.querySelectorAll('.scroll-arrival').forEach((element) => {
-      element.classList.remove('scroll-arrival');
-    });
+    removeEventListener('scroll', onScroll);
+    stage?.removeEventListener('pointermove', move);
+    stage?.removeEventListener('pointerleave', resetPointer);
+    cancelAnimationFrame(scrollFrame);
+    scrollFrame = 0;
+    resetPointer();
+    if (progress) progress.style.transform = 'scaleX(0)';
+    document.querySelectorAll('.in-view').forEach(element => element.classList.remove('in-view'));
   }
-
   function start() {
     stop();
-    if (preference.matches || !('IntersectionObserver' in window)) return;
-    try {
-      observer = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.classList.add('scroll-arrival');
-          observer?.unobserve(entry.target);
-        }
-      }, { threshold: 0.08 });
-      document.querySelectorAll(selector).forEach((element) => observer?.observe(element));
-    } catch {
-      // Unsupported/failed initialization leaves the original visible layout.
-      stop();
+    if (preference.matches) return;
+    addEventListener('scroll', onScroll, { passive: true });
+    updateProgress();
+    if (pointerPreference.matches) {
+      stage?.addEventListener('pointermove', move);
+      stage?.addEventListener('pointerleave', resetPointer);
     }
+    if (!('IntersectionObserver' in window)) return;
+    observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('in-view');
+        observer?.unobserve(entry.target);
+      }
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.project-scene, .about, .contact').forEach(element => observer?.observe(element));
   }
-
   preference.addEventListener('change', start);
+  pointerPreference.addEventListener('change', start);
   start();
 </script>

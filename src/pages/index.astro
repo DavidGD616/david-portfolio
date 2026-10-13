@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import spotInsight from '../images/SpotInsight.jpg';
 import devsBoard from '../images/devsboard.jpg';
 import sanimals from '../images/sanimals.jpg';
+import me from '../images/me.png';
 const projects = [
   { id: 'devsboard', name: 'DevsBoard', number: '01', category: 'Job discovery', image: devsBoard, alt: 'DevsBoard project preview with developer job listings and search filters', description: 'A job aggregator for developers. Listings, search and location filters in one interface.', tags: ['Next.js', 'Tailwind CSS', 'Supabase'], code: 'https://github.com/DavidGD616/devsboard', note: 'Personal project · Original project preview' },
   { id: 'resuease', name: 'ResuEase', number: '02', category: 'Documents & PDFs', image: null, alt: 'ResuEase’s original branded visual: Build your professional resume', description: 'A resume builder with structured editing, live preview and PDF export. React-PDF creates the document in the browser; PDF.js renders the preview. Reorderable sections and local autosave support the editing flow.', tags: ['React', 'React-PDF', 'PDF.js', 'Supabase'], code: 'https://github.com/DavidGD616/ResuEase', app: 'https://resuease.vercel.app/', note: 'Personal project · App starts at sign-in · Preview is original artwork, not an editor screenshot' },
@@ -13,21 +14,30 @@ const projects = [
 ];
 ---
 <Layout title="David Guerrero | Projects & code" description="A personal collection of web projects by David Guerrero. Explore ResuEase, DevsBoard, SpotInsight and Sanimals, with project previews and source code.">
-  <main id="main" class="archive-main">
-    <section id="projects" class="work" aria-labelledby="work-title">
-      <div class="archive-heading"><h2 id="work-title">Selected work</h2><p>Four personal projects / An ongoing collection</p></div>
-      <div class="project-list">
-        {projects.map(project => <article id={project.id} class="project-entry">
-          <div class="project-heading"><div><p class="project-category">{project.category}</p><h3>{project.name}</h3></div><span class="project-number" aria-label={`Project ${project.number}`}>{project.number}</span></div>
-          <figure class:list={['project-preview', { 'artwork-preview': !project.image }]}>
-            {project.image ? <Image src={project.image} alt={project.alt} widths={[480, 800, 1200]} sizes="(max-width: 800px) 100vw, 70vw" loading={project.number === '01' ? 'eager' : 'lazy'} /> : <img src="/resuease-brand.png" width="1200" height="630" alt={project.alt} loading="lazy" />}
-            <figcaption>{project.note}</figcaption>
-          </figure>
-          <div class="project-info"><p>{project.description}</p><div class="project-meta"><ul class="tags" aria-label={`${project.name} technologies`}>{project.tags.map(tag => <li>{tag}</li>)}</ul><div class="project-links">{project.app && <a href={project.app}>Open app <span aria-hidden="true">↗</span></a>}<a href={project.code}>Source code <span aria-hidden="true">↗</span></a></div></div></div>
-        </article>)}
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid container">
+        <div class="hero-copy"><p class="eyebrow hero-line">David Guerrero / Web developer</p><h1 id="hero-title"><span class="hero-word">Curiosity,</span><span class="hero-word hero-word-second">in <em>code.</em></span></h1><p class="hero-description hero-line">I’m David, a self-taught developer.<br />Here’s what I’ve been making.</p><a class="work-link hero-line" href="#projects"><span class="circle-arrow" aria-hidden="true">↓</span>Take a look around</a></div>
+        <div class="hero-art" data-pointer-stage aria-label="A glimpse of the projects">
+          <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div><span class="art-cross cross-one" aria-hidden="true">+</span><span class="art-cross cross-two" aria-hidden="true">+</span>
+          <a class="art-piece art-devs" href="#devsboard" aria-label="Explore DevsBoard"><div class="art-label"><span>01 / DevsBoard</span><span aria-hidden="true">↗</span></div><Image src={devsBoard} alt="DevsBoard project preview with job listings" width={760} loading="eager" /></a>
+          <a class="art-piece art-spot" href="#spotinsight" aria-label="Explore SpotInsight"><div class="art-label"><span>03 / SpotInsight</span><span aria-hidden="true">↗</span></div><Image src={spotInsight} alt="SpotInsight project preview with Spotify listening data" width={500} loading="eager" /></a>
+          <a class="art-piece art-resume" href="#resuease" aria-label="Explore ResuEase"><img src="/resuease-brand.png" width="1200" height="630" alt="ResuEase original project artwork" fetchpriority="high" /><div class="art-label"><span>02 / ResuEase</span><span aria-hidden="true">↗</span></div></a>
+          <span class="art-caption">A few ideas that became real things.</span>
+        </div>
       </div>
+      <div class="hero-bottom container"><span>Personal projects. Real learning.</span><span class="hero-rule" aria-hidden="true"></span><span>Scroll to explore <span aria-hidden="true">↓</span></span></div>
     </section>
-    <section id="about-me" class="about archive-section" aria-labelledby="about-title"><p class="section-index">02 / ABOUT</p><h2 id="about-title">Always learning.<br />Usually building.</h2><div class="about-copy"><p>My interest in development started with an e-commerce business in 2019. The business didn’t work out, but building it got me into code.</p><p>Since then, I’ve been learning by building web apps. I enjoy the details of an interface and figuring out how the pieces fit together.</p><h3>Tools I work with</h3><ul class="tags"><li>JavaScript</li><li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>Express</li><li>Supabase</li></ul></div></section>
-    <section id="contact" class="contact archive-section" aria-labelledby="contact-title"><p class="section-index">03 / ELSEWHERE</p><h2 id="contact-title">Find me here.</h2><div class="contact-links"><a href="mailto:David.GuerreroD@protonmail.com">David.GuerreroD@protonmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/DavidGD616">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/david-guerrerodiaz/">LinkedIn <span aria-hidden="true">↗</span></a></div></section>
+    <section id="projects" class="work" aria-labelledby="work-title">
+      <div class="work-heading container"><p class="eyebrow">Selected experiments / 01—04</p><h2 id="work-title">From an idea<br />to <em>something real.</em></h2><p>Interfaces, integrations, and the things<br />I learned by putting them together.</p></div>
+      {projects.map(project => <article id={project.id} class:list={['project-scene', `scene-${project.id}`]}>
+        <div class="scene-inner container">
+          <div class="scene-copy"><p class="scene-kicker"><span>{project.number}</span> / {project.category}</p><h3>{project.name}</h3><p class="scene-description">{project.description}</p><ul class="tags" aria-label={`${project.name} technologies`}>{project.tags.map(tag => <li>{tag}</li>)}</ul><div class="project-links">{project.app && <a class="project-link" href={project.app}>Open app <span class="link-arrow" aria-hidden="true">↗</span></a>}<a class="project-link" href={project.code}>Source code <span class="link-arrow" aria-hidden="true">↗</span></a></div><p class="scene-note">{project.note}</p></div>
+          <figure class="scene-media"><div class="media-stage"><div class="media-halo" aria-hidden="true"></div><div class="image-wrap">{project.image ? <Image src={project.image} alt={project.alt} widths={[480, 800, 1200]} sizes="(max-width: 800px) 100vw, 65vw" loading="lazy" /> : <img src="/resuease-brand.png" width="1200" height="630" alt={project.alt} loading="lazy" />}</div><span class="media-corner corner-top" aria-hidden="true"></span><span class="media-corner corner-bottom" aria-hidden="true"></span></div><figcaption>{project.image ? 'Original project preview' : 'Original artwork · Not an editor screenshot'}</figcaption></figure>
+        </div>
+      </article>)}
+    </section>
+    <section id="about-me" class="about container" aria-labelledby="about-title"><div class="portrait-composition"><span class="portrait-outline" aria-hidden="true"></span><Image src={me} width={400} alt="Portrait of David Guerrero" loading="lazy" /><span class="portrait-caption">The person behind the projects.</span></div><div class="about-copy"><p class="eyebrow">A little about me</p><h2 id="about-title">Still curious.<br /><em>Still building.</em></h2><p>My interest in development started with an e-commerce business in 2019. The business didn’t work out, but building it got me into code.</p><p>Since then, I’ve been learning by building web apps. I enjoy the details of an interface and figuring out how the pieces fit together.</p><div class="about-tools"><span>Tools I work with</span><ul class="tags"><li>JavaScript</li><li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>Express</li><li>Supabase</li></ul></div></div></section>
+    <section id="contact" class="contact container" aria-labelledby="contact-title"><div><p class="eyebrow">Elsewhere on the internet</p><h2 id="contact-title">Keep in <em>touch.</em><span aria-hidden="true">↗</span></h2></div><div class="contact-links"><a class="email-link" href="mailto:David.GuerreroD@protonmail.com">David.GuerreroD@protonmail.com <span aria-hidden="true">↗</span></a><div><a href="https://github.com/DavidGD616">GitHub ↗</a><a href="https://www.linkedin.com/in/david-guerrerodiaz/">LinkedIn ↗</a></div></div></section>
   </main>
 </Layout>
