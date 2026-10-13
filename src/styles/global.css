@@ -12,6 +12,8 @@ button, select { font: inherit; }
 select { touch-action: manipulation; }
 a:focus-visible, select:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 6px; }
 img { display: block; max-width: 100%; height: auto; }
+.vector-icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.12em; flex-shrink: 0; }
+.art-label .vector-icon { width: 12px; height: 12px; }
 h1, h2, h3, p, figure { margin: 0; }
 h1, h2, h3 { line-height: 1.04; letter-spacing: -0.065em; font-weight: 650; }
 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.07em; color: var(--accent-text); }
