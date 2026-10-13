@@ -6,6 +6,32 @@
     <option value="dark">Dark</option>
   </select>
 </label>
+<style>
+  .theme-control {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+  .theme-control select {
+    appearance: none;
+    padding: 8px 34px 8px 12px;
+    min-height: 36px;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+  .theme-control::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+</style>
 <script>
   const select = document.querySelector<HTMLSelectElement>('#theme-select');
   const media = matchMedia('(prefers-color-scheme: dark)');
