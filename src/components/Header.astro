@@ -1,109 +1,15 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro"
-
-const navItems = [
-  {
-    title: "Projects",
-    label: "projects",
-    url: "/#projects",
-  },
-  {
-    title: "Experience",
-    label: "experience",
-    url: "/#experience",
-  },
-  {
-    title: "About Me",
-    label: "about-me",
-    url: "/#about-me",
-  },
-  {
-    title: "Contact",
-    label: "contact",
-    url: "mailto:David.GuerreroD@protonmail.com",
-  },
-]
+import ThemeToggle from './ThemeToggle.astro';
 ---
-
-<header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
-  >
-  <nav class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center bg-white dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-90">
-    {
-        navItems.map((link) => (
-          <a
-            class="relative block px-2 py-2 transition hover:text-[#1dd05d] dark:hover:text-[#62fbd8]"
-            aria-label={link.label}
-            href={link.url}
-          >
-            {link.title}
-          </a>
-        ))
-      }
-      <ThemeToggle />
-  </nav>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="wordmark" href="#main" aria-label="David Guerrero, home">David Guerrero<span aria-hidden="true">.</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#projects">Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <ThemeToggle />
+  </div>
 </header>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
-
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-[#1dd05d]")
-            } else {
-              item.classList.remove("text-[#1dd05d]")
-            }
-          })
-        }
-      })
-    }
-
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    })
-
-    sections.forEach((section) => {
-      observer.observe(section)
-    })
-
-    // Cleanup function
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect()
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section)
-        })
-      }
-    }
-  })
-</script>
-
-
-<style>
- @keyframes nav-shadow {
-    0% {
-        background-color: rgba(255, 255, 255, 0);
-    }
-    100% {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-}
-
-  nav {
-    animation: nav-shadow 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
-  }
-</style>

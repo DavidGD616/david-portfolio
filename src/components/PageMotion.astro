@@ -1,0 +1,35 @@
+<script>
+  // Animate on arrival, never hide content while waiting for JavaScript.
+  const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  let observer: IntersectionObserver | undefined;
+  const selector = '.section-heading, .service-card, .case-study, .process-grid li, .about, .contact';
+
+  function stop() {
+    observer?.disconnect();
+    observer = undefined;
+    document.querySelectorAll('.scroll-arrival').forEach((element) => {
+      element.classList.remove('scroll-arrival');
+    });
+  }
+
+  function start() {
+    stop();
+    if (preference.matches || !('IntersectionObserver' in window)) return;
+    try {
+      observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('scroll-arrival');
+          observer?.unobserve(entry.target);
+        }
+      }, { threshold: 0.08 });
+      document.querySelectorAll(selector).forEach((element) => observer?.observe(element));
+    } catch {
+      // Unsupported/failed initialization leaves the original visible layout.
+      stop();
+    }
+  }
+
+  preference.addEventListener('change', start);
+  start();
+</script>
