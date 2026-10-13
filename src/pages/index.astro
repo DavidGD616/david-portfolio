@@ -2,45 +2,32 @@
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import me from '../images/me.png';
 import spotInsight from '../images/SpotInsight.jpg';
 import devsBoard from '../images/devsboard.jpg';
 import sanimals from '../images/sanimals.jpg';
 const projects = [
-  { name: 'DevsBoard', number: '02', category: 'Job discovery', image: devsBoard, alt: 'DevsBoard project preview with developer job listings and search filters', description: 'A job aggregator for developers, bringing listings, search and location filters into one interface.', tags: ['Next.js', 'Tailwind CSS', 'Supabase'], code: 'https://github.com/DavidGD616/devsboard', note: 'Personal project · Original project preview' },
-  { name: 'SpotInsight', number: '03', category: 'Music & data', image: spotInsight, alt: 'SpotInsight project preview showing a Spotify profile and listening data', description: 'An interface for exploring Spotify listening data, from top artists and tracks to recent plays and playlist recommendations.', tags: ['React', 'Express', 'Spotify API'], code: 'https://github.com/DavidGD616/spotinsight', note: 'Personal project · Runs locally' },
-  { name: 'Sanimals', number: '04', category: 'E-commerce', image: sanimals, alt: 'Sanimals project preview showing its illustrated shirt storefront', description: 'A print-on-demand storefront built with React, Express and MongoDB. A personal exploration of product browsing, shopping carts and a Stripe checkout integration.', tags: ['React', 'Express', 'MongoDB', 'Stripe'], code: 'https://github.com/DavidGD616/sanimals', note: 'Personal project · Original project preview' },
+  { id: 'devsboard', name: 'DevsBoard', number: '01', category: 'Job discovery', image: devsBoard, alt: 'DevsBoard project preview with developer job listings and search filters', description: 'A job aggregator for developers. Listings, search and location filters in one interface.', tags: ['Next.js', 'Tailwind CSS', 'Supabase'], code: 'https://github.com/DavidGD616/devsboard', note: 'Personal project · Original project preview' },
+  { id: 'resuease', name: 'ResuEase', number: '02', category: 'Documents & PDFs', image: null, alt: 'ResuEase’s original branded visual: Build your professional resume', description: 'A resume builder with structured editing, live preview and PDF export. React-PDF creates the document in the browser; PDF.js renders the preview. Reorderable sections and local autosave support the editing flow.', tags: ['React', 'React-PDF', 'PDF.js', 'Supabase'], code: 'https://github.com/DavidGD616/ResuEase', app: 'https://resuease.vercel.app/', note: 'Personal project · App starts at sign-in · Preview is original artwork, not an editor screenshot' },
+  { id: 'spotinsight', name: 'SpotInsight', number: '03', category: 'Music & data', image: spotInsight, alt: 'SpotInsight project preview showing a Spotify profile and listening data', description: 'An interface for exploring Spotify listening data: top artists, tracks, recent plays and playlist recommendations.', tags: ['React', 'Express', 'Spotify API'], code: 'https://github.com/DavidGD616/spotinsight', note: 'Personal project · Runs locally' },
+  { id: 'sanimals', name: 'Sanimals', number: '04', category: 'E-commerce', image: sanimals, alt: 'Sanimals project preview showing its illustrated shirt storefront', description: 'A print-on-demand storefront. A personal exploration of product browsing, shopping carts and a Stripe checkout integration.', tags: ['React', 'Express', 'MongoDB', 'Stripe'], code: 'https://github.com/DavidGD616/sanimals', note: 'Personal project · Original project preview' },
 ];
 ---
 <Layout title="David Guerrero | Projects & code" description="A personal collection of web projects by David Guerrero. Explore ResuEase, DevsBoard, SpotInsight and Sanimals, with project previews and source code.">
-  <main id="main">
-    <section class="container intro" aria-labelledby="intro-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>David Guerrero / Web developer</p>
-        <h1 id="intro-title">Things I’ve <span>built.</span></h1>
-        <p class="intro-description">I’m a self-taught developer. I learn by making things—from a resume builder to an app for exploring music.</p>
-      </div>
-      <div class="intro-index"><span>SELECTED WORK</span><a href="#projects">Explore the projects <span aria-hidden="true">↓</span></a><span>01—04 / Personal projects</span></div>
-    </section>
-
-    <section id="projects" class="container work" aria-labelledby="work-title">
-      <div class="section-heading"><h2 id="work-title">Selected projects</h2><p>Experiments, side projects, and what I learned along the way.</p></div>
-      <div class="project-grid">
-        <article id="resuease" class="project-card featured">
-          <figure class="project-preview resuease-preview"><img src="/resuease-brand.png" width="1200" height="630" alt="ResuEase’s original branded visual: Build your professional resume" fetchpriority="high" /><figcaption>Original project artwork · Not an editor screenshot</figcaption></figure>
-          <div class="project-copy"><p class="project-kicker"><span>01</span> Documents & PDFs</p><h3>ResuEase</h3><p>A resume builder with structured editing, live preview and PDF export in one place.</p><p class="project-detail">React-PDF generates the document in the browser, while PDF.js renders the preview. Reorderable sections and local autosave support the editing flow.</p><ul class="tags" aria-label="ResuEase technologies"><li>React</li><li>React-PDF</li><li>PDF.js</li><li>Supabase</li></ul><div class="project-links"><a href="https://resuease.vercel.app/">Open app <span aria-hidden="true">↗</span></a><a href="https://github.com/DavidGD616/ResuEase">Source code <span aria-hidden="true">↗</span></a></div><p class="project-note">Personal project · The app starts at sign-in</p></div>
-        </article>
-        {projects.map((project) => <article class:list={['project-card', { wide: project.name === 'Sanimals' }]}>
-          <figure class="project-preview"><Image src={project.image} alt={project.alt} widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 55vw" loading="lazy" /><figcaption>Original project preview</figcaption></figure>
-          <div class="project-copy"><p class="project-kicker"><span>{project.number}</span> {project.category}</p><h3>{project.name}</h3><p>{project.description}</p><ul class="tags" aria-label={`${project.name} technologies`}>{project.tags.map(tag => <li>{tag}</li>)}</ul><div class="project-links"><a href={project.code}>Source code <span aria-hidden="true">↗</span></a></div><p class="project-note">{project.note}</p></div>
+  <main id="main" class="archive-main">
+    <section id="projects" class="work" aria-labelledby="work-title">
+      <div class="archive-heading"><h2 id="work-title">Selected work</h2><p>Four personal projects / An ongoing collection</p></div>
+      <div class="project-list">
+        {projects.map(project => <article id={project.id} class="project-entry">
+          <div class="project-heading"><div><p class="project-category">{project.category}</p><h3>{project.name}</h3></div><span class="project-number" aria-label={`Project ${project.number}`}>{project.number}</span></div>
+          <figure class:list={['project-preview', { 'artwork-preview': !project.image }]}>
+            {project.image ? <Image src={project.image} alt={project.alt} widths={[480, 800, 1200]} sizes="(max-width: 800px) 100vw, 70vw" loading={project.number === '01' ? 'eager' : 'lazy'} /> : <img src="/resuease-brand.png" width="1200" height="630" alt={project.alt} loading="lazy" />}
+            <figcaption>{project.note}</figcaption>
+          </figure>
+          <div class="project-info"><p>{project.description}</p><div class="project-meta"><ul class="tags" aria-label={`${project.name} technologies`}>{project.tags.map(tag => <li>{tag}</li>)}</ul><div class="project-links">{project.app && <a href={project.app}>Open app <span aria-hidden="true">↗</span></a>}<a href={project.code}>Source code <span aria-hidden="true">↗</span></a></div></div></div>
         </article>)}
       </div>
     </section>
-
-    <section id="about-me" class="container about section" aria-labelledby="about-title">
-      <div class="about-heading"><p class="eyebrow">A little about me</p><h2 id="about-title">Hi, I’m David.</h2><Image src={me} width={160} alt="Portrait of David Guerrero" loading="lazy" /></div>
-      <div class="about-copy"><p>My interest in development started with an e-commerce business in 2019. The business didn’t work out, but building it got me into code.</p><p>Since then, I’ve been learning by building web apps and working with JavaScript, React and Next.js. I enjoy the details of an interface and figuring out how the pieces fit together.</p><div class="skills"><h3>Tools I work with</h3><ul class="tags"><li>JavaScript</li><li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>Express</li><li>Supabase</li></ul></div></div>
-    </section>
-    <section id="contact" class="container contact section" aria-labelledby="contact-title"><div><p class="eyebrow">Elsewhere</p><h2 id="contact-title">Keep in touch.</h2></div><div class="contact-links"><a href="mailto:David.GuerreroD@protonmail.com">David.GuerreroD@protonmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/DavidGD616">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/david-guerrerodiaz/">LinkedIn <span aria-hidden="true">↗</span></a></div></section>
+    <section id="about-me" class="about archive-section" aria-labelledby="about-title"><p class="section-index">02 / ABOUT</p><h2 id="about-title">Always learning.<br />Usually building.</h2><div class="about-copy"><p>My interest in development started with an e-commerce business in 2019. The business didn’t work out, but building it got me into code.</p><p>Since then, I’ve been learning by building web apps. I enjoy the details of an interface and figuring out how the pieces fit together.</p><h3>Tools I work with</h3><ul class="tags"><li>JavaScript</li><li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>Express</li><li>Supabase</li></ul></div></section>
+    <section id="contact" class="contact archive-section" aria-labelledby="contact-title"><p class="section-index">03 / ELSEWHERE</p><h2 id="contact-title">Find me here.</h2><div class="contact-links"><a href="mailto:David.GuerreroD@protonmail.com">David.GuerreroD@protonmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/DavidGD616">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/david-guerrerodiaz/">LinkedIn <span aria-hidden="true">↗</span></a></div></section>
   </main>
 </Layout>
