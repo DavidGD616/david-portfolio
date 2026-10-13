@@ -2,7 +2,7 @@
   // Animate on arrival, never hide content while waiting for JavaScript.
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   let observer: IntersectionObserver | undefined;
-  const selector = '.section-heading, .service-card, .case-study, .process-grid li, .about, .contact';
+  const selector = '.section-heading, .project-card, .about, .contact';
 
   function stop() {
     observer?.disconnect();
